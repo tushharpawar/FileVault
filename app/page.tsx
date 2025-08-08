@@ -293,7 +293,7 @@ export default function UserFilePlatform() {
                             </div>
                           </div>
 
-                          <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                          <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 sm:transition-all sm:duration-300 opacity-100 sm:opacity-0 sm:group-hover:opacity-100">
                             <DropdownMenu>
                               <DropdownMenuTrigger asChild>
                                 <Button 
@@ -304,25 +304,34 @@ export default function UserFilePlatform() {
                                   <MoreVertical className="w-4 h-4" />
                                 </Button>
                               </DropdownMenuTrigger>
-                              <DropdownMenuContent align="end" className="w-48">
-                                <DropdownMenuItem onClick={(e) => {
-                                  e.stopPropagation()
-                                  handlePreview(file)
-                                }}>
+                              <DropdownMenuContent align="end" className="w-48 z-50" sideOffset={4}>
+                                <DropdownMenuItem 
+                                  onClick={(e) => {
+                                    e.stopPropagation()
+                                    handlePreview(file)
+                                  }}
+                                  className="cursor-pointer focus:bg-slate-100"
+                                >
                                   <Eye className="w-4 h-4 mr-2" />
                                   Preview
                                 </DropdownMenuItem>
-                                <DropdownMenuItem onClick={(e) => {
-                                  e.stopPropagation()
-                                  handleDownload(file)
-                                }}>
+                                <DropdownMenuItem 
+                                  onClick={(e) => {
+                                    e.stopPropagation()
+                                    handleDownload(file)
+                                  }}
+                                  className="cursor-pointer focus:bg-slate-100"
+                                >
                                   <Download className="w-4 h-4 mr-2" />
                                   Download
                                 </DropdownMenuItem>
-                                <DropdownMenuItem onClick={(e) => {
-                                  e.stopPropagation()
-                                  handleShare(file)
-                                }}>
+                                <DropdownMenuItem 
+                                  onClick={(e) => {
+                                    e.stopPropagation()
+                                    handleShare(file)
+                                  }}
+                                  className="cursor-pointer focus:bg-slate-100"
+                                >
                                   <Share2 className="w-4 h-4 mr-2" />
                                   Share
                                 </DropdownMenuItem>
@@ -405,23 +414,32 @@ export default function UserFilePlatform() {
                           )}
                         </div>
                       </div>
-                      <div className="flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                      <div className="flex-shrink-0 opacity-0 group-hover:opacity-100 sm:transition-opacity sm:duration-200 opacity-100 sm:opacity-0 sm:group-hover:opacity-100">
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild>
                             <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
                               <MoreVertical className="w-4 h-4" />
                             </Button>
                           </DropdownMenuTrigger>
-                          <DropdownMenuContent align="end">
-                            <DropdownMenuItem onClick={() => handlePreview(file)}>
+                          <DropdownMenuContent align="end" className="z-50" sideOffset={4}>
+                            <DropdownMenuItem 
+                              onClick={() => handlePreview(file)}
+                              className="cursor-pointer focus:bg-slate-100"
+                            >
                               <Eye className="w-4 h-4 mr-2" />
                               Preview
                             </DropdownMenuItem>
-                            <DropdownMenuItem onClick={() => handleDownload(file)}>
+                            <DropdownMenuItem 
+                              onClick={() => handleDownload(file)}
+                              className="cursor-pointer focus:bg-slate-100"
+                            >
                               <Download className="w-4 h-4 mr-2" />
                               Download
                             </DropdownMenuItem>
-                            <DropdownMenuItem onClick={() => handleShare(file)}>
+                            <DropdownMenuItem 
+                              onClick={() => handleShare(file)}
+                              className="cursor-pointer focus:bg-slate-100"
+                            >
                               <Share2 className="w-4 h-4 mr-2" />
                               Share
                             </DropdownMenuItem>

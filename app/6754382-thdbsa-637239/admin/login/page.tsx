@@ -23,7 +23,10 @@ export default function AdminLogin() {
     setLoading(true)
 
     try {
-      const result = await adminLogin(username, password)
+      const trimmedUsername = username.trim()
+      const trimmedPassword = password.trim()
+      
+      const result = await adminLogin(trimmedUsername, trimmedPassword)
       
       if (result.success) {
         showAuthToasts.loginSuccess('admin')
@@ -66,6 +69,7 @@ export default function AdminLogin() {
                 type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
+                onBlur={(e) => setUsername(e.target.value.trim())}
                 required
                 className="w-full"
                 placeholder="Enter username"
@@ -80,6 +84,7 @@ export default function AdminLogin() {
                   type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  onBlur={(e) => setPassword(e.target.value.trim())}
                   required
                   className="w-full pr-10"
                   placeholder="Enter password"

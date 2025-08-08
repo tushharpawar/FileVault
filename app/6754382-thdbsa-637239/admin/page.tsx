@@ -210,71 +210,83 @@ export default function AdminDashboard() {
       {/* Header */}
       <header className="bg-white border-b border-slate-200 sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center space-x-2 sm:space-x-4">
-              <h1 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-red-600 to-orange-600 bg-clip-text text-transparent">
+          <div className="flex items-center justify-between h-14 sm:h-16">
+            <div className="flex items-center space-x-2 min-w-0 flex-1">
+              <h1 className="text-lg sm:text-xl lg:text-2xl font-bold bg-gradient-to-r from-red-600 to-orange-600 bg-clip-text text-transparent truncate">
                 Admin Panel
               </h1>
-              <Badge variant="secondary" className="bg-red-100 text-red-700 text-xs">
-                Administrator
+              <Badge variant="secondary" className="bg-red-100 text-red-700 text-xs flex-shrink-0">
+                Admin
               </Badge>
             </div>
             
-            <div className="flex items-center space-x-2 sm:space-x-4">
-              <div className="relative hidden md:block">
+            <div className="flex items-center space-x-1 sm:space-x-2 lg:space-x-4">
+              {/* Desktop Search */}
+              <div className="relative hidden lg:block">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
                 <Input
                   placeholder="Search files..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 w-60 lg:w-80 bg-slate-50 border-slate-200 focus:bg-white"
+                  className="pl-10 w-60 xl:w-80 bg-slate-50 border-slate-200 focus:bg-white"
                 />
               </div>
               
+              {/* View Mode Toggle */}
               <div className="flex items-center bg-slate-100 rounded-lg p-1">
                 <Button
                   variant={viewMode === "grid" ? "default" : "ghost"}
                   size="sm"
                   onClick={() => setViewMode("grid")}
-                  className="h-8 w-8 p-0"
+                  className="h-7 w-7 sm:h-8 sm:w-8 p-0"
+                  title="Grid View"
                 >
-                  <Grid3X3 className="w-4 h-4" />
+                  <Grid3X3 className="w-3 h-3 sm:w-4 sm:h-4" />
                 </Button>
                 <Button
                   variant={viewMode === "list" ? "default" : "ghost"}
                   size="sm"
                   onClick={() => setViewMode("list")}
-                  className="h-8 w-8 p-0"
+                  className="h-7 w-7 sm:h-8 sm:w-8 p-0"
+                  title="List View"
                 >
-                  <List className="w-4 h-4" />
+                  <List className="w-3 h-3 sm:w-4 sm:h-4" />
                 </Button>
               </div>
 
+              {/* Upload Button */}
               <Button 
                 onClick={() => setShowUpload(true)}
-                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 h-8 sm:h-9"
                 size="sm"
               >
-                <Upload className="w-4 h-4 mr-0 sm:mr-2" />
+                <Upload className="w-4 h-4 sm:mr-2" />
                 <span className="hidden sm:inline">Upload</span>
               </Button>
 
-              <Button variant="outline" onClick={handleLogout} size="sm">
-                <LogOut className="w-4 h-4 mr-0 sm:mr-2" />
+              {/* Logout Button */}
+              <Button 
+                variant="outline" 
+                onClick={handleLogout} 
+                size="sm"
+                className="h-8 sm:h-9"
+                title="Logout"
+              >
+                <LogOut className="w-4 h-4 sm:mr-2" />
                 <span className="hidden sm:inline">Logout</span>
               </Button>
             </div>
           </div>
           
           {/* Mobile Search */}
-          <div className="md:hidden pb-4">
+          <div className="lg:hidden pb-3 sm:pb-4">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
               <Input
                 placeholder="Search files..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 w-full bg-slate-50 border-slate-200 focus:bg-white"
+                className="pl-10 w-full bg-slate-50 border-slate-200 focus:bg-white h-9"
               />
             </div>
           </div>
@@ -381,7 +393,7 @@ export default function AdminDashboard() {
                             </div>
                           </div>
 
-                          <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                          <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 sm:transition-all sm:duration-300 opacity-100 sm:opacity-0 sm:group-hover:opacity-100">
                             <DropdownMenu>
                               <DropdownMenuTrigger asChild>
                                 <Button 
@@ -392,32 +404,44 @@ export default function AdminDashboard() {
                                   <MoreVertical className="w-4 h-4" />
                                 </Button>
                               </DropdownMenuTrigger>
-                              <DropdownMenuContent align="end" className="w-48">
-                                <DropdownMenuItem onClick={(e) => {
-                                  e.stopPropagation()
-                                  handlePreview(file)
-                                }}>
+                              <DropdownMenuContent align="end" className="w-48 z-50" sideOffset={4}>
+                                <DropdownMenuItem 
+                                  onClick={(e) => {
+                                    e.stopPropagation()
+                                    handlePreview(file)
+                                  }}
+                                  className="cursor-pointer focus:bg-slate-100"
+                                >
                                   <Eye className="w-4 h-4 mr-2" />
                                   Preview
                                 </DropdownMenuItem>
-                                <DropdownMenuItem onClick={(e) => {
-                                  e.stopPropagation()
-                                  handleDownload(file)
-                                }}>
+                                <DropdownMenuItem 
+                                  onClick={(e) => {
+                                    e.stopPropagation()
+                                    handleDownload(file)
+                                  }}
+                                  className="cursor-pointer focus:bg-slate-100"
+                                >
                                   <Download className="w-4 h-4 mr-2" />
                                   Download
                                 </DropdownMenuItem>
-                                <DropdownMenuItem onClick={(e) => {
-                                  e.stopPropagation()
-                                  handleShare(file)
-                                }}>
+                                <DropdownMenuItem 
+                                  onClick={(e) => {
+                                    e.stopPropagation()
+                                    handleShare(file)
+                                  }}
+                                  className="cursor-pointer focus:bg-slate-100"
+                                >
                                   <Share2 className="w-4 h-4 mr-2" />
                                   Share
                                 </DropdownMenuItem>
-                                <DropdownMenuItem onClick={(e) => {
-                                  e.stopPropagation()
-                                  handleDelete(file)
-                                }} className="text-red-600">
+                                <DropdownMenuItem 
+                                  onClick={(e) => {
+                                    e.stopPropagation()
+                                    handleDelete(file)
+                                  }} 
+                                  className="text-red-600 cursor-pointer focus:bg-red-50 focus:text-red-700"
+                                >
                                   <Trash2 className="w-4 h-4 mr-2" />
                                   Delete
                                 </DropdownMenuItem>
@@ -504,27 +528,39 @@ export default function AdminDashboard() {
                           )}
                         </div>
                       </div>
-                      <div className="flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                      <div className="flex-shrink-0 opacity-0 group-hover:opacity-100 sm:transition-opacity sm:duration-200 opacity-100 sm:opacity-0 sm:group-hover:opacity-100">
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild>
                             <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
                               <MoreVertical className="w-4 h-4" />
                             </Button>
                           </DropdownMenuTrigger>
-                          <DropdownMenuContent align="end">
-                            <DropdownMenuItem onClick={() => handlePreview(file)}>
+                          <DropdownMenuContent align="end" className="z-50" sideOffset={4}>
+                            <DropdownMenuItem 
+                              onClick={() => handlePreview(file)}
+                              className="cursor-pointer focus:bg-slate-100"
+                            >
                               <Eye className="w-4 h-4 mr-2" />
                               Preview
                             </DropdownMenuItem>
-                            <DropdownMenuItem onClick={() => handleDownload(file)}>
+                            <DropdownMenuItem 
+                              onClick={() => handleDownload(file)}
+                              className="cursor-pointer focus:bg-slate-100"
+                            >
                               <Download className="w-4 h-4 mr-2" />
                               Download
                             </DropdownMenuItem>
-                            <DropdownMenuItem onClick={() => handleShare(file)}>
+                            <DropdownMenuItem 
+                              onClick={() => handleShare(file)}
+                              className="cursor-pointer focus:bg-slate-100"
+                            >
                               <Share2 className="w-4 h-4 mr-2" />
                               Share
                             </DropdownMenuItem>
-                            <DropdownMenuItem onClick={() => handleDelete(file)} className="text-red-600">
+                            <DropdownMenuItem 
+                              onClick={() => handleDelete(file)} 
+                              className="text-red-600 cursor-pointer focus:bg-red-50 focus:text-red-700"
+                            >
                               <Trash2 className="w-4 h-4 mr-2" />
                               Delete
                             </DropdownMenuItem>
