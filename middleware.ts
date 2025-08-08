@@ -11,6 +11,8 @@ export function middleware(request: NextRequest) {
     '/6754382-thdbsa-637239/admin/login',
     '/8726-nalyswej/analytics',
     '/8726-nalyswej/analytics/login',
+    '/toast-test',
+    '/loaderio-330c2327e022e5e0b9176a70b78a1487.txt',
   ]
 
   // Check if the current path is valid or starts with a valid route
